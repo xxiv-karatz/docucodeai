@@ -213,21 +213,6 @@ function HomePage() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="gap-1.5 border-primary/40 bg-primary/10 text-primary">
-              <Sparkles className="h-3 w-3" /> Powered by Lovable AI
-            </Badge>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hidden sm:inline-flex"
-            >
-              <Button variant="ghost" size="sm" className="gap-1.5">
-                <Github className="h-4 w-4" /> Source
-              </Button>
-            </a>
-          </div>
         </div>
       </header>
 
@@ -449,29 +434,6 @@ function HomePage() {
         </div>
       </main>
 
-      {/* Footer stats */}
-      <footer className="fixed inset-x-0 bottom-0 border-t border-border/60 bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-2.5 text-xs">
-          <div className="flex items-center gap-4 text-muted-foreground">
-            <span>
-              Model: <span className="font-mono text-foreground/80">{model || "google/gemini-3-flash-preview"}</span>
-            </span>
-            <span className="hidden sm:inline">
-              Requests: <span className="text-foreground/80">{requestCount}</span>
-            </span>
-          </div>
-          <div className="flex items-center gap-4">
-            {lastCost !== null && (
-              <Badge variant="outline" className="gap-1.5 border-primary/30 bg-primary/10 text-primary">
-                Last: {formatCost(lastCost)}
-              </Badge>
-            )}
-            <Badge variant="outline" className="gap-1.5 border-success/30 bg-success/10 text-success">
-              Total: {formatCost(totalCost)}
-            </Badge>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
