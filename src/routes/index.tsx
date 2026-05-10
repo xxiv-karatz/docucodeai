@@ -265,6 +265,30 @@ function HomePage() {
             </div>
           </div>
 
+          <div className="mb-3 flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 p-2">
+            <Library className="ml-1 h-4 w-4 shrink-0 text-primary" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Prompt library
+            </span>
+            <Select value={promptPresetId} onValueChange={setPromptPresetId}>
+              <SelectTrigger className="h-8 flex-1 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {PROMPT_LIBRARY.map((p) => (
+                  <SelectItem key={p.id} value={p.id}>
+                    <div className="flex flex-col">
+                      <span className="font-medium">{p.label}</span>
+                      <span className="text-[11px] text-muted-foreground">
+                        {p.description}
+                      </span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           <Textarea
             value={code}
             onChange={(e) => setCode(e.target.value)}
