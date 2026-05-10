@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { CodeBlock } from "@/components/CodeBlock";
 import { EXAMPLES } from "@/lib/examples";
+import { PROMPT_LIBRARY } from "@/lib/prompt-library";
 import { formatCost } from "@/lib/pricing";
 
 export const Route = createFileRoute("/")({
