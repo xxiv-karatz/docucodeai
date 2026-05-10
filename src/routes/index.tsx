@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { toast, Toaster } from "sonner";
-import { Sparkles, Loader2, FileCode2, Github, Wand2, BarChart3 } from "lucide-react";
+import { Sparkles, Loader2, FileCode2, Github, Wand2, BarChart3, Library } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
