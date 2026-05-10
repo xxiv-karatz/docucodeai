@@ -74,9 +74,13 @@ export const Route = createFileRoute("/api/document")({
         const model = gateway(modelId);
 
         try {
+          const preset = getPromptPreset(parsed.promptPresetId);
+          const system = preset.instruction
+            ? `${DOCUMENTATION_SYSTEM_PROMPT}\n\nADDITIONAL STYLE INSTRUCTIONS:\n${preset.instruction}`
+            : DOCUMENTATION_SYSTEM_PROMPT;
           const result = await generateText({
             model,
-            system: DOCUMENTATION_SYSTEM_PROMPT,
+            system,
             prompt: buildDocumentationUserPrompt(parsed.code, parsed.language),
           });
 
