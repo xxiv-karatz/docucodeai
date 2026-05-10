@@ -90,6 +90,7 @@ function detectLanguage(code: string): string {
 function HomePage() {
   const [code, setCode] = useState(EXAMPLES[0].code);
   const [language, setLanguage] = useState("auto");
+  const [promptPresetId, setPromptPresetId] = useState<string>("standard");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<DocResult | null>(null);
   const [rawError, setRawError] = useState<string | null>(null);
