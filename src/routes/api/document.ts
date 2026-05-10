@@ -4,12 +4,14 @@ import { generateText } from "ai";
 import { z } from "zod";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway";
 import { DOCUMENTATION_SYSTEM_PROMPT, buildDocumentationUserPrompt } from "@/lib/prompts";
+import { getPromptPreset } from "@/lib/prompt-library";
 import { estimateCost } from "@/lib/pricing";
 
 const BodySchema = z.object({
   code: z.string().min(1).max(20_000),
   language: z.string().min(1).max(40),
   model: z.string().min(1).max(120).optional(),
+  promptPresetId: z.string().min(1).max(40).optional(),
 });
 
 const DocSchema = z.object({
@@ -72,9 +74,13 @@ export const Route = createFileRoute("/api/document")({
         const model = gateway(modelId);
 
         try {
+          const preset = getPromptPreset(parsed.promptPresetId);
+          const system = preset.instruction
+            ? `${DOCUMENTATION_SYSTEM_PROMPT}\n\nADDITIONAL STYLE INSTRUCTIONS:\n${preset.instruction}`
+            : DOCUMENTATION_SYSTEM_PROMPT;
           const result = await generateText({
             model,
-            system: DOCUMENTATION_SYSTEM_PROMPT,
+            system,
             prompt: buildDocumentationUserPrompt(parsed.code, parsed.language),
           });
 

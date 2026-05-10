@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { toast, Toaster } from "sonner";
-import { Sparkles, Loader2, FileCode2, Github, Wand2, BarChart3 } from "lucide-react";
+import { Sparkles, Loader2, FileCode2, Github, Wand2, BarChart3, Library } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { CodeBlock } from "@/components/CodeBlock";
 import { EXAMPLES } from "@/lib/examples";
+import { PROMPT_LIBRARY } from "@/lib/prompt-library";
 import { formatCost } from "@/lib/pricing";
 
 export const Route = createFileRoute("/")({
@@ -89,6 +90,7 @@ function detectLanguage(code: string): string {
 function HomePage() {
   const [code, setCode] = useState(EXAMPLES[0].code);
   const [language, setLanguage] = useState("auto");
+  const [promptPresetId, setPromptPresetId] = useState<string>("standard");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<DocResult | null>(null);
   const [rawError, setRawError] = useState<string | null>(null);
@@ -126,7 +128,7 @@ function HomePage() {
       const res = await fetch("/api/document", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, language: effectiveLanguage }),
+        body: JSON.stringify({ code, language: effectiveLanguage, promptPresetId }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -261,6 +263,30 @@ function HomePage() {
                 </SelectContent>
               </Select>
             </div>
+          </div>
+
+          <div className="mb-3 flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 p-2">
+            <Library className="ml-1 h-4 w-4 shrink-0 text-primary" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Prompt library
+            </span>
+            <Select value={promptPresetId} onValueChange={setPromptPresetId}>
+              <SelectTrigger className="h-8 flex-1 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {PROMPT_LIBRARY.map((p) => (
+                  <SelectItem key={p.id} value={p.id}>
+                    <div className="flex flex-col">
+                      <span className="font-medium">{p.label}</span>
+                      <span className="text-[11px] text-muted-foreground">
+                        {p.description}
+                      </span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <Textarea
