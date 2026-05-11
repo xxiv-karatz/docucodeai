@@ -21,47 +21,44 @@ p2=input('p2 (r/p/s): ')
 print(rps(p1,p2))`,
   },
   {
-    language: "python",
-    label: "Python — bubble sort",
-    code: `def bs(a):
-    n=len(a)
-    for i in range(n):
-        for j in range(0,n-i-1):
-            if a[j]>a[j+1]:a[j],a[j+1]=a[j+1],a[j]
-    return a`,
+    language: "javascript",
+    label: "JavaScript — bubble sort",
+    code: `function bs(a){
+    for(let i=0;i<a.length;i++)
+        for(let j=0;j<a.length-i-1;j++)
+            if(a[j]>a[j+1])[a[j],a[j+1]]=[a[j+1],a[j]];
+    return a
+}`,
   },
   {
-    language: "python",
-    label: "Python — binary search",
-    code: `def bsearch(a,t):
-    l,r=0,len(a)-1
-    while l<=r:
-        m=(l+r)//2
-        if a[m]==t:return m
-        elif a[m]<t:l=m+1
-        else:r=m-1
-    return -1`,
+    language: "java",
+    label: "Java — binary search",
+    code: `public class B{
+    static int s(int[]a,int t){
+        int l=0,r=a.length-1;
+        while(l<=r){int m=(l+r)/2;if(a[m]==t)return m;else if(a[m]<t)l=m+1;else r=m-1;}
+        return -1;
+    }
+}`,
   },
   {
-    language: "python",
-    label: "Python — linear search",
-    code: `def ls(a,t):
-    for i in range(len(a)):
-        if a[i]==t:return i
-    return -1`,
+    language: "go",
+    label: "Go — linear search",
+    code: `package main
+import "fmt"
+func ls(a []int,t int)int{for i,v:=range a{if v==t{return i}};return -1}
+func main(){fmt.Println(ls([]int{3,1,4,1,5,9,2,6},5))}`,
   },
   {
-    language: "python",
-    label: "Python — guess the number",
-    code: `import random
-n=random.randint(1,100)
-g=0;t=0
-while g!=n:
-    g=int(input('guess 1-100: '))
-    t+=1
-    if g<n:print('higher')
-    elif g>n:print('lower')
-print('got it in',t,'tries')`,
+    language: "javascript",
+    label: "JavaScript — guess the number",
+    code: `const rl=require('readline').createInterface({input:process.stdin,output:process.stdout});
+const n=Math.floor(Math.random()*100)+1;let t=0;
+const ask=()=>rl.question('guess 1-100: ',g=>{t++;g=+g;
+    if(g<n){console.log('higher');ask()}
+    else if(g>n){console.log('lower');ask()}
+    else{console.log('got it in',t,'tries');rl.close()}
+});ask();`,
   },
   {
     language: "python",
@@ -73,50 +70,57 @@ print('got it in',t,'tries')`,
     return None`,
   },
   {
-    language: "python",
-    label: "Python — fizzbuzz",
-    code: `for i in range(1,101):
-    if i%15==0:print('FizzBuzz')
-    elif i%3==0:print('Fizz')
-    elif i%5==0:print('Buzz')
-    else:print(i)`,
+    language: "rust",
+    label: "Rust — fizzbuzz",
+    code: `fn main(){
+    for i in 1..=100{
+        match(i%3,i%5){
+            (0,0)=>println!("FizzBuzz"),
+            (0,_)=>println!("Fizz"),
+            (_,0)=>println!("Buzz"),
+            _=>println!("{}",i)
+        }
+    }
+}`,
   },
   {
-    language: "python",
-    label: "Python — factorial recursive",
-    code: `def f(n):
-    if n<=1:return 1
-    return n*f(n-1)
-print(f(int(input('n: '))))`,
+    language: "javascript",
+    label: "JavaScript — factorial recursive",
+    code: `function f(n){return n<=1?1:n*f(n-1)}
+console.log(f(parseInt(prompt('n: '))));`,
   },
   {
-    language: "python",
-    label: "Python — palindrome check",
-    code: `def p(s):
-    s=s.lower().replace(' ','')
-    return s==s[::-1]
-print(p(input('word: ')))`,
+    language: "java",
+    label: "Java — palindrome check",
+    code: `import java.util.Scanner;
+public class P{
+    public static void main(String[]a){
+        String s=new Scanner(System.in).nextLine().toLowerCase().replace(" ","");
+        System.out.println(s.equals(new StringBuilder(s).reverse().toString()));
+    }
+}`,
   },
   {
-    language: "python",
-    label: "Python — fibonacci sequence",
-    code: `def fib(n):
-    a,b=0,1
-    for _ in range(n):
-        print(a,end=' ')
-        a,b=b,a+b
-fib(int(input('how many: ')))`,
+    language: "go",
+    label: "Go — fibonacci sequence",
+    code: `package main
+import "fmt"
+func main(){
+    n:=10;a,b:=0,1
+    for i:=0;i<n;i++{fmt.Print(a," ");a,b=b,a+b}
+}`,
   },
   {
-    language: "python",
-    label: "Python — selection sort",
-    code: `def ss(a):
-    for i in range(len(a)):
-        m=i
-        for j in range(i+1,len(a)):
-            if a[j]<a[m]:m=j
-        a[i],a[m]=a[m],a[i]
-    return a`,
+    language: "typescript",
+    label: "TypeScript — selection sort",
+    code: `function ss(a:number[]):number[]{
+    for(let i=0;i<a.length;i++){
+        let m=i;
+        for(let j=i+1;j<a.length;j++)if(a[j]<a[m])m=j;
+        [a[i],a[m]]=[a[m],a[i]];
+    }
+    return a;
+}`,
   },
   {
     language: "python",
